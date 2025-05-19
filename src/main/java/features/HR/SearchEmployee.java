@@ -1,7 +1,8 @@
-package features;
+package features.HR;
 
-import users.User;
+import features.DisplayProfile;
 import features.Login;
+import users.User;
 
 public class SearchEmployee extends DisplayProfile {
 

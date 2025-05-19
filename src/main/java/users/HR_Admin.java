@@ -2,6 +2,10 @@ package users;
 
 
 import features.*;
+import features.HR.AddNewEmployee;
+import features.HR.DeleteEmployee;
+import features.HR.EditEmployee;
+import features.HR.SearchEmployee;
 
 
 import java.util.ArrayList;

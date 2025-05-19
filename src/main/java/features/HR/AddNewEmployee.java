@@ -1,4 +1,4 @@
-package features;
+package features.HR;
 
 import csvManager.Reader;
 import users.HR_Admin;
@@ -11,14 +11,15 @@ import java.util.Scanner;
 public class AddNewEmployee {
 
     private final Scanner scanner;
-    private final String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\EmployeeData.csv";
+    private final Reader reader;
 
     public AddNewEmployee() {
         scanner = new Scanner(System.in);
+        reader = new Reader("HR");
     }
 
     public void appendData(String data) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath, true))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(reader.getFilePath(), true))) {
             pw.println(data);
         } catch (IOException e) {
             e.printStackTrace();
@@ -27,7 +28,6 @@ public class AddNewEmployee {
 
     private void addNewUserForm(HR_Admin admin) {
 
-        Reader reader = new Reader();
         int newEmployeeID = Integer.parseInt(reader.getLastEmployeeID())+1;
 
         System.out.println("New Employee ID: " + newEmployeeID);

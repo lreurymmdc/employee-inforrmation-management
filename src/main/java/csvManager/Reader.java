@@ -10,8 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Reader {
-    private final String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\EmployeeData.csv";
+    private String filePath;
+
+    private final String filePathforHR = System.getProperty("user.dir") + "\\src\\main\\resources\\EmployeeData.csv";
+    private final String filePathforPayroll = System.getProperty("user.dir") + "\\src\\main\\resources\\Attendance Record.csv";
+
     private List<String[]> records = new ArrayList<>();
+
+    public Reader(String filePath) {
+        if (filePath.equalsIgnoreCase("HR")) {
+
+            this.filePath = filePathforHR;
+        }
+        else if (filePath.equalsIgnoreCase("Payroll")) {
+            this.filePath = filePathforPayroll;
+        }
+        readCSV();
+    }
 
     public List<String[]> readCSV() {
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
@@ -22,7 +37,6 @@ public class Reader {
         return records;
     }
     public boolean isUserIDValid(int userID) {
-        readCSV();
         for (String[] record : records) {
             for (String value : record) {
                 if (value.equals(String.valueOf(userID))) {
@@ -42,16 +56,16 @@ public class Reader {
     }
 
     public List<String[]> getRecords() {
-        readCSV();
         return records;
     }
     public String getFilePath() {
-        return this.filePath;
+        return filePath;
+
     }
     public String getLastEmployeeID() {
-        readCSV();
-        int lastEmployeeID = records.size() - 1;
-        return records.get(lastEmployeeID)[0];
+        List<String[]> employees = getRecords();
+        int lastEmployeeID = employees.size() - 1;
+        return employees.get(lastEmployeeID)[0];
 
     }
 }

@@ -1,13 +1,50 @@
-import features.AddNewEmployee;
 import features.DisplayProfile;
 import features.Login;
+import features.Payroll.Payroll;
 import users.HR_Admin;
+import users.Payroll_Admin;
 import users.User;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
-public class Main {
+public class Main extends JFrame {
+
+    private JPanel MainPanel;
+    private JLabel AppTitle;
+    private JPanel jsPanel_Header;
+    private JPanel jsPanel_Body;
+    private JPanel jsPanel_Footer;
+    private JPanel js_Panel_Fields;
+    private JTextField jsTxtField_UserID_Login;
+    private JTextField jsTxtField_Birthday_Login;
+    private JLabel jsLabel_UserID_Login;
+    private JLabel jsLabel_Birthday_Login;
+    private JButton loginButton;
+
+
+    public Main() {
+        setTitle("MotorPH - Employee Management System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(375, 667);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
+        setContentPane(MainPanel);
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+    }
+
     public static void main(String[] args) {
+
+        new Main();
 
 
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +55,7 @@ public class Main {
 
         if (login.isLoginSuccessful()) {
             HR_Admin hr = new HR_Admin(login);
+            Payroll_Admin payroll = new Payroll_Admin(login);
             User user = new User(login);
 
             while (!userAction.equalsIgnoreCase("x")) {
@@ -33,6 +71,10 @@ public class Main {
                         case "A":
                             DisplayProfile myProfile = new DisplayProfile();
                             myProfile.displayProfile(hr);
+                            break;
+                        case "B":
+                            payroll.selectPayslipForm();
+                            payroll.generatePayslipInformation(login.getUserIDInput());
                             break;
 
                         case "D":
@@ -66,7 +108,8 @@ public class Main {
                             System.out.println("Invalid input. Please try again!");
                     }
 
-                } else {
+                }
+                 else {
                     user.showMenuUser();
                     System.out.println("X. Exit");
                     System.out.print("Select an option: ");
@@ -77,7 +120,10 @@ public class Main {
                             DisplayProfile myProfile = new DisplayProfile();
                             myProfile.displayProfile(user);
                             break;
-
+                        case "B":
+                            payroll.selectPayslipForm();
+                            payroll.generatePayslipInformation(login.getUserIDInput());
+                            break;
                         case "X":
                             System.out.println("Exiting...");
                             break;
@@ -93,6 +139,5 @@ public class Main {
         }
 
         scanner.close();
-
     }
 }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Login {
     private int userID;
-    private String birthday, role;
+    private String birthday;
     private boolean loginStatus = false;
 
     private Scanner scanner;
@@ -16,7 +16,7 @@ public class Login {
 
     public Login() {
         scanner = new Scanner(System.in);
-        read = new Reader();
+        read = new Reader("HR");
     }
 
     public void login() {

@@ -1,7 +1,8 @@
-package features;
+package features.HR;
 
 import com.opencsv.CSVWriter;
 import csvManager.Reader;
+import features.Login;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +11,13 @@ import java.util.Scanner;
 
 public class DeleteEmployee {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+    private final Reader reader;
+
+    public DeleteEmployee() {
+        scanner = new Scanner(System.in);
+        reader = new Reader("HR");
+    }
 
     public void deleteEmployee(int searchKey, Login login) {
         SearchEmployee search = new SearchEmployee(searchKey, login);
@@ -34,7 +41,6 @@ public class DeleteEmployee {
     }
 
     private void performDeletion(int employeeIdToRemove) {
-        Reader reader = new Reader();
         List<String[]> records = reader.getRecords();
         int index = reader.getIndexOfUserID(employeeIdToRemove, records);
 

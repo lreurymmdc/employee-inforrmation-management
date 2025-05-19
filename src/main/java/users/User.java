@@ -8,7 +8,7 @@ public class User {
     protected int employeeId;
     protected String birthday;
     private int searchKey;
-    private final Reader database = new Reader();
+    private final Reader database = new Reader("HR");
 
 
 
@@ -125,6 +125,7 @@ public class User {
     public void showMenuUser() {
         System.out.println("\nWhat do you want to do ?\n");
         System.out.println("A. View my profile");
+        System.out.println("B. View my payslip");
     }
     public void showMenuHR() {
         showMenuUser();
